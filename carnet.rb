@@ -16,13 +16,6 @@ class Contact
 		puts "   " + "Tel : " + @telephone + " / Email : " + @email
 	end
 	
-	def liste_contacts
-    [].each_with_index do |coordonnees, index|
-    puts "#{index}"
-    puts "#{coordonnees.fiche_complete}"
-    end
-	end
-
 end
 
 class Menu
@@ -33,7 +26,24 @@ class Menu
 		puts "1- Ajouter un contact"
 		puts "2- Supprimer un contact"
 		puts "3- Quitter le carnet d'adresse"
-		puts "Choisissez 0, 1, 2 ou 3"		
+		puts "Choisissez 0, 1, 2 ou 3"	
+	end
+
+	def message_liste_actuelle
+		puts "\nVotre liste actuelle de contact est :"
+		puts "======================================"
+	end
+
+	def message_nouvelle_liste
+		puts "\nVotre nouvelle liste de contact est :"
+		puts "======================================"
+	end
+
+	def liste_contacts(tableau)
+    tableau.each_with_index do |coordonnees, index|
+    puts "#{index} /"
+    puts "#{coordonnees.fiche_complete}"
+    end
 	end
 
 end
@@ -77,20 +87,16 @@ reponse_sortie = "non"
 loop do
 
 	#Initialisation du Menu
-	Menu.new	
+	menu = Menu.new	
 	#Récupération du choix utilisateur dans le menu
 	choix = gets.chomp.to_i
-		
 		#Choix 0, consulter la liste des contacts
 		if choix == 0
-
-			puts "\nVotre liste actuelle de contact est :"
-			puts "======================================"
-      mes_contacts.each_with_index do |coordonnees, index|
-      puts "\n#{index} /"
-      puts "#{coordonnees.fiche_complete}"
-      end
 			
+			#Informations et détails liste actuelle des contacts
+			menu.message_liste_actuelle
+			menu.liste_contacts(mes_contacts)
+      
 			puts "\n\nVoulez-vous retourner à l'accueil (oui) ou quitter (non) ?"
 			#N'importe quelle réponse nous renvoit dans la boucle
 			#Seul "non" nous fais sortir.
@@ -118,7 +124,8 @@ loop do
 			#Ajout du nouveau contact dans le tableau mes_contacts
 			mes_contacts << nouveau_contact
 			
-			puts "\nVotre contact a été ajouté !!!"
+			puts "\nVotre contact a été ajouté !!!\n"
+
 			puts "\nVoulez-vous retourner à l'accueil (oui) ou quitter (non) ?"
 			#N'importe quelle réponse nous renvoit dans la boucle
 			#Seul "non" nous fais sortir.
@@ -126,27 +133,18 @@ loop do
 		
 		#Choix 2, supprimer un contact
 		elsif choix == 2
-
-			puts "\nVotre liste actuelle de contact est :"
-			puts "======================================"
-			
-			mes_contacts.each_with_index do |coordonnees, index|
-      puts "\n#{index} /"
-      puts "#{coordonnees.fiche_complete}"
-      end
+			#Informations et détails liste actuelle des contacts
+			menu.message_liste_actuelle
+			menu.liste_contacts(mes_contacts)
 
 			puts "Sélectionnez un contact à supprimer (N° + Entrée):"
 			a_supprimer = gets.chomp.to_i
 			mes_contacts.delete_at(a_supprimer)
-
 			puts "\nVotre contact a été supprimé !!!"
-			puts "\n\nVotre nouvelle liste de contact est :"
-			puts "====================================="
 			
-			mes_contacts.each_with_index do |coordonnees, index|
-      puts "\n#{index} /"
-      puts "#{coordonnees.fiche_complete}"
-      end
+			#Information et détails nouvelle liste de contacts
+			menu.message_nouvelle_liste
+			menu.liste_contacts(mes_contacts)
 
 			puts "\nVoulez-vous retourner à l'accueil (oui) ou quitter (non) ?"
 			reponse = gets.chomp.to_s
