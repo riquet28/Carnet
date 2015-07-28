@@ -16,8 +16,13 @@ class Contact
 		puts "   " + "Tel : " + @telephone + " / Email : " + @email
 	end
 	
-	def ajoute_carnet
+	def liste_contacts
+    [].each_with_index do |coordonnees, index|
+    puts "#{index}"
+    puts "#{coordonnees.fiche_complete}"
+    end
 	end
+
 end
 
 class Menu
@@ -78,14 +83,14 @@ loop do
 		
 		#Choix 0, consulter la liste des contacts
 		if choix == 0
-			i = 0#Compteur liste contact
+
 			puts "\nVotre liste actuelle de contact est :"
 			puts "======================================"
-			mes_contacts.each do |a|
-				puts "\n#{i}/"
-				puts "#{a.fiche_complete}"
-				i += 1
-			end
+      mes_contacts.each_with_index do |coordonnees, index|
+      puts "\n#{index} /"
+      puts "#{coordonnees.fiche_complete}"
+      end
+			
 			puts "\n\nVoulez-vous retourner à l'accueil (oui) ou quitter (non) ?"
 			#N'importe quelle réponse nous renvoit dans la boucle
 			#Seul "non" nous fais sortir.
@@ -121,14 +126,14 @@ loop do
 		
 		#Choix 2, supprimer un contact
 		elsif choix == 2
-			i = 0#Compteur liste contact
+
 			puts "\nVotre liste actuelle de contact est :"
 			puts "======================================"
-			mes_contacts.each do |a|
-				puts "\n#{i}/"
-				puts "#{a.fiche_complete}"
-				i += 1
-			end
+			
+			mes_contacts.each_with_index do |coordonnees, index|
+      puts "\n#{index} /"
+      puts "#{coordonnees.fiche_complete}"
+      end
 
 			puts "Sélectionnez un contact à supprimer (N° + Entrée):"
 			a_supprimer = gets.chomp.to_i
@@ -137,12 +142,11 @@ loop do
 			puts "\nVotre contact a été supprimé !!!"
 			puts "\n\nVotre nouvelle liste de contact est :"
 			puts "====================================="
-			i = 0
-			mes_contacts.each do |a|
-				puts "\n#{i}/"
-				puts "#{a.fiche_complete}"
-				i += 1
-			end
+			
+			mes_contacts.each_with_index do |coordonnees, index|
+      puts "\n#{index} /"
+      puts "#{coordonnees.fiche_complete}"
+      end
 
 			puts "\nVoulez-vous retourner à l'accueil (oui) ou quitter (non) ?"
 			reponse = gets.chomp.to_s
