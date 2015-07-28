@@ -72,7 +72,7 @@ reponse_sortie = "non"
 loop do
 
 	#Initialisation du Menu
-	puts Menu.new	
+	Menu.new	
 	#Récupération du choix utilisateur dans le menu
 	choix = gets.chomp.to_i
 		
